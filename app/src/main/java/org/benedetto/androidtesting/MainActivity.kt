@@ -1,21 +1,29 @@
 package org.benedetto.androidtesting
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import org.benedetto.androidtesting.util.log
 
 class MainActivity : ComponentActivity() {
 
-     private val TAG = "MainActivity"
+    private val TAG = "MainActivity"
 
     private lateinit var button: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button = findViewById(R.id.button)
-        button.setOnClickListener { Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show() }
+        button.setOnClickListener {
+            //Show a dialog
+            AlertDialog.Builder(this)
+                .setTitle("Test Dialog")
+                .setMessage("This is a dialog")
+                .setPositiveButton("Close") { dialog, _ -> dialog.dismiss() }
+                .create()
+                .show()
+        }
     }
 
     override fun onStart() {
