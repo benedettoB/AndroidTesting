@@ -1,47 +1,45 @@
 package org.benedetto.androidtesting
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import org.benedetto.androidtesting.ui.theme.AndroidTestingTheme
+import org.benedetto.androidtesting.util.log
 
 class MainActivity : ComponentActivity() {
+
+     private val TAG = "MainActivity"
+
+    private lateinit var button: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            AndroidTestingTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+        setContentView(R.layout.activity_main)
+        button = findViewById(R.id.button)
+        button.setOnClickListener { Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show() }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    override fun onStart() {
+        super.onStart()
+        log(TAG, "onStart() fired")
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AndroidTestingTheme {
-        Greeting("Android")
+    override fun onResume() {
+        super.onResume()
+        log(TAG, "onResume() fired")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        log(TAG, "onPause() fired")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        log(TAG, "onStop() fired")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        log(TAG, "onDestory() fired")
     }
 }
