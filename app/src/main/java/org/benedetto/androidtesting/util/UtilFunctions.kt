@@ -12,7 +12,7 @@ fun getCurrentWithMilis(): String{
     return dateFormat.format(currentDate)
 
 }
-
+private val threadName = Thread.currentThread().name
 fun log(tag:String, msg:String){
-    Log.d(tag, "$msg: ${getCurrentWithMilis()}")
+    Log.d(tag, "Msg: $msg: Thread: $threadName, Time: ${getCurrentWithMilis()}")
 }
